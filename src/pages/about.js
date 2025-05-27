@@ -1,56 +1,56 @@
 import { useState, useEffect } from "react";
 
 export default function About() {
-    // Define state
+
     const [facts, setFacts] = useState([]);
-    const [mainImage, setMainImage] = useState("");  // Store the main cat image
+    const [mainImage, setMainImage] = useState("");  
 
-    // Perform fetch and update state
+   
     useEffect(() => {
-        // API URL for facts about cats
+       
         const factsAPI = "https://meowfacts.herokuapp.com/";
-        // API URL for cat images (random images for main image)
-        const imagesAPI = "https://api.thecatapi.com/v1/images/search";  // Random image each time
+       
+        const imagesAPI = "https://api.thecatapi.com/v1/images/search";  
 
-        // Fetch facts
+        
         fetch(factsAPI)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 setFacts(data.data); 
             })
-            .catch(error => console.error("Error fetching data:", error)); // Handle errors
+            .catch(error => console.error("Error fetching data:", error)); 
         
-        // Fetch a random main image
+        
         fetch(imagesAPI)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                setMainImage(data[0].url);  // Set the random image URL
+                setMainImage(data[0].url);  
             })
-            .catch(error => console.error("Error fetching images:", error)); // Handle errors
+            .catch(error => console.error("Error fetching images:", error)); 
     }, []);
 
-    // Inline styles
+    
     const styles = {
         container: {
             fontFamily: 'Arial, sans-serif',
             textAlign: 'center',
             padding: '20px',
             position: 'relative',
-            background: 'linear-gradient(to bottom, #f0f0f0, #e0e0e0)',  // Soft gradient background
-            minHeight: '100vh',  // Ensure full page height
+            background: 'linear-gradient(to bottom, #f0f0f0, #e0e0e0)',  
+            minHeight: '100vh',  
         },
         headerFooter: {
-            backgroundColor: '#4caf50',  // Beautiful green header/footer
+            backgroundColor: '#0059FF',  
             color: '#fff',
             padding: '15px 0',
             fontSize: '28px',
             fontWeight: 'bold',
-            borderRadius: '0 0 20px 20px',  // Rounded corners at bottom
+            borderRadius: '0 0 20px 20px',  
         },
         footer: {
-            backgroundColor: '#4caf50',  // Match header color
+            backgroundColor: '#0059FF',  
             color: '#fff',
             padding: '10px 0',
             fontSize: '16px',
@@ -58,7 +58,7 @@ export default function About() {
             bottom: '0',
             width: '100%',
             textAlign: 'center',
-            borderRadius: '20px 20px 0 0',  // Rounded corners at top
+            borderRadius: '20px 20px 0 0',  
         },
         mainCatImage: {
             width: '100%',
@@ -128,7 +128,7 @@ export default function About() {
 
             {/* Main Image */}
             {mainImage && <img src={mainImage} alt="Random Cat" style={styles.mainCatImage} />}
-            <p style={styles.title}>Zde jsou fakty o kočkách:</p>
+            <p style={styles.title}>Zde jsou fakty o kočičkách:</p>
 
             <div style={styles.factsContainer}>
                 {facts.map((fact, index) => (
@@ -140,7 +140,7 @@ export default function About() {
 
             {/* Footer */}
             <footer style={styles.footer}>
-                &copy; 2025 Kočičí Fakta. Všechna práva vyhrazena.
+                &copy; 2025 Kočičí Fakta.
             </footer>
         </div>
     );
