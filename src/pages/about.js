@@ -42,7 +42,7 @@ export default function About() {
             minHeight: '100vh',  
         },
         headerFooter: {
-            backgroundColor: '#4a4a4a',  
+            backgroundColor: 'linear-gradient(90deg, #00ffc3, #9d00ff)',  
             color: '#fff',
             padding: '15px 0',
             fontSize: '28px',
@@ -50,7 +50,7 @@ export default function About() {
             borderRadius: '0 0 20px 20px',  
         },
         footer: {
-            backgroundColor: '#4a4a4a',  
+            backgroundColor: 'linear-gradient(90deg, #00ffc3, #9d00ff)',  
             color: '#fff',
             padding: '10px 0',
             fontSize: '16px',
