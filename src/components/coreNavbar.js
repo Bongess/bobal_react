@@ -4,39 +4,57 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function BasicExample() {
-  return (
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">Kočičky</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  const styles = {
+    navbar: {
+      background: 'linear-gradient(90deg, #8e2de2, #4a00e0)', // neon fialový gradient
+      boxShadow: '0 0 15px #8e2de2',
+      fontWeight: 'bold',
+      fontSize: '18px',
+    },
+    brand: {
+      color: '#00ffc3',
+      textShadow: '0 0 10px #00ffc3',
+      fontWeight: '900',
+      fontSize: '24px',
+      letterSpacing: '2px',
+    },
+    navLink: {
+      color: '#00ffc3',
+      textShadow: '0 0 6px #00ffc3',
+      marginLeft: '15px',
+      transition: 'color 0.3s ease',
+      cursor: 'pointer',
+    },
+    navLinkHover: {
+      color: '#ffffff',
+      textShadow: '0 0 20px #00ffc3',
+    },
+    dropdownToggle: {
+      color: '#00ffc3',
+      textShadow: '0 0 6px #00ffc3',
+      cursor: 'pointer',
+    }
+  };
 
+  return (
+    <Navbar expand="lg" style={styles.navbar} variant="dark" sticky="top">
+      <Container>
+        <Navbar.Brand href="/" style={styles.brand}>Kočičí Web</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link href="/" style={styles.navLink}>Domů</Nav.Link>
+            <Nav.Link href="/about" style={styles.navLink}>Kočičky</Nav.Link>
+            <Nav.Link href="#pricing" style={styles.navLink}>Ceník</Nav.Link>
+            <NavDropdown title="Další" id="basic-nav-dropdown" style={styles.dropdownToggle}>
+              <NavDropdown.Item href="#action1">Akce 1</NavDropdown.Item>
+              <NavDropdown.Item href="#action2">Akce 2</NavDropdown.Item>
+              <NavDropdown.Item href="#action3">Ještě něco</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
