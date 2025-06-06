@@ -1,76 +1,84 @@
 import { useState, useEffect } from "react";
 
 export default function About() {
-
     const [facts, setFacts] = useState([]);
-    const [mainImage, setMainImage] = useState("");  
+    const [mainImage, setMainImage] = useState("");
+    const [factsError, setFactsError] = useState(null);
+    const [imageError, setImageError] = useState(null);
 
-   
+    const fetchFacts = () => {
+        fetch("https://meowfacts.herokuapp.com/")
+            .then((res) => res.json())
+            .then((data) => {
+                setFacts(data.data);
+                setFactsError(null);
+            })
+            .catch((error) => {
+                console.error("Error fetching facts:", error);
+                setFactsError("Nepodařilo se načíst fakta o kočkách.");
+            });
+    };
+
+    const fetchImage = () => {
+        fetch("https://api.thecatapi.com/v1/images/search")
+            .then((res) => res.json())
+            .then((data) => {
+                setMainImage(data[0].url);
+                setImageError(null);
+            })
+            .catch((error) => {
+                console.error("Error fetching image:", error);
+                setImageError("Nepodařilo se načíst obrázek kočky.");
+            });
+    };
+
     useEffect(() => {
-       
-        const factsAPI = "https://meowfacts.herokuapp.com/";
-       
-        const imagesAPI = "https://api.thecatapi.com/v1/images/search";  
-
-        
-        fetch(factsAPI)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setFacts(data.data); 
-            })
-            .catch(error => console.error("Error fetching data:", error)); 
-        
-        
-        fetch(imagesAPI)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setMainImage(data[0].url);  
-            })
-            .catch(error => console.error("Error fetching images:", error)); 
+        fetchFacts();
+        fetchImage();
     }, []);
 
-    
     const styles = {
         container: {
             fontFamily: 'Arial, sans-serif',
             textAlign: 'center',
             padding: '20px',
-            position: 'relative',
-            background: 'linear-gradient(to bottom, #f0f0f0, #e0e0e0)',  
-            minHeight: '100vh',  
+            background: '#121212',
+            color: '#ffffff',
+            minHeight: '100vh',
         },
         headerFooter: {
-            backgroundColor: 'linear-gradient(90deg, #00ffc3, #9d00ff)',  
-            color: '#fff',
+            background: 'linear-gradient(90deg, #00ffc3, #9d00ff)',
+            color: '#000',
             padding: '15px 0',
             fontSize: '28px',
             fontWeight: 'bold',
-            borderRadius: '0 0 20px 20px',  
+            borderRadius: '0 0 20px 20px',
+            boxShadow: '0 0 20px #9d00ff',
+            textShadow: '0 0 5px #fff',
         },
         footer: {
-            backgroundColor: 'linear-gradient(90deg, #00ffc3, #9d00ff)',  
-            color: '#fff',
+            background: 'linear-gradient(90deg, #00ffc3, #9d00ff)',
+            color: '#000',
             padding: '10px 0',
             fontSize: '16px',
-            position: 'absolute',
-            bottom: '0',
             width: '100%',
             textAlign: 'center',
-            borderRadius: '20px 20px 0 0',  
+            borderRadius: '20px 20px 0 0',
+            boxShadow: '0 0 20px #00ffc3',
+            textShadow: '0 0 4px #fff',
+            marginTop: '40px',
         },
         mainCatImage: {
             width: '100%',
             maxWidth: '700px',
             marginBottom: '20px',
             borderRadius: '20px',
-            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
         },
         title: {
             fontSize: '24px',
             fontWeight: 'bold',
-            color: '#333',
+            color: '#fff',
             marginBottom: '20px',
         },
         factsContainer: {
@@ -80,43 +88,42 @@ export default function About() {
             marginBottom: '40px',
         },
         factBox: {
-            backgroundColor: '#fff',
-            border: '2px solid #ccc',
+            backgroundColor: '#1e1e1e',
+            border: '2px solid #00ffc3',
             padding: '10px',
             margin: '5px 0',
             borderRadius: '10px',
             width: '80%',
             maxWidth: '500px',
+            color: '#fff',
+            boxShadow: '0 0 10px #00ffc3',
         },
-        galleryContainer: {
-            marginTop: '30px',
-        },
-        galleryTitle: {
-            fontSize: '20px',
+        errorText: {
+            color: '#ff4d4d',
             fontWeight: 'bold',
-            color: '#333',
-            marginBottom: '15px',
-        },
-        imageGallery: {
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '15px',
-            flexWrap: 'wrap',
-        },
-        imageBox: {
-            width: '200px',
-            height: '200px',
-            overflow: 'hidden',
+            backgroundColor: '#2a0000',
+            padding: '10px',
             borderRadius: '10px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            transition: 'transform 0.3s ease',
+            marginBottom: '20px',
+            maxWidth: '600px',
+            margin: '0 auto 20px',
         },
-        catImage: {
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
+        button: {
+            padding: '10px 20px',
+            margin: '10px',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            color: '#000',
+            background: 'linear-gradient(90deg, #00ffc3, #9d00ff)',
+            border: 'none',
             borderRadius: '10px',
+            cursor: 'pointer',
+            boxShadow: '0 0 10px #9d00ff',
+            transition: 'transform 0.2s ease',
         },
+        buttonHover: {
+            transform: 'scale(1.05)',
+        }
     };
 
     return (
@@ -126,17 +133,37 @@ export default function About() {
                 Kočičí fakta a obrázky
             </header>
 
-            {/* Main Image */}
-            {mainImage && <img src={mainImage} alt="Random Cat" style={styles.mainCatImage} />}
+            {/* Tlačítka */}
+            <div>
+                <button style={styles.button} onClick={fetchImage}>
+                    🖼️ Načíst nový obrázek
+                </button>
+                <button style={styles.button} onClick={fetchFacts}>
+                    📚 Načíst nové fakty
+                </button>
+            </div>
+
+            {/* Obrázek nebo chyba */}
+            {imageError ? (
+                <div style={styles.errorText}>{imageError}</div>
+            ) : (
+                mainImage && <img src={mainImage} alt="Random Cat" style={styles.mainCatImage} />
+            )}
+
             <p style={styles.title}>Zde jsou fakty o kočičkách:</p>
 
-            <div style={styles.factsContainer}>
-                {facts.map((fact, index) => (
-                    <div key={index} style={styles.factBox}>
-                        <p>{fact}</p>
-                    </div>
-                ))}
-            </div>
+            {/* Fakta nebo chyba */}
+            {factsError ? (
+                <div style={styles.errorText}>{factsError}</div>
+            ) : (
+                <div style={styles.factsContainer}>
+                    {facts.map((fact, index) => (
+                        <div key={index} style={styles.factBox}>
+                            <p>{fact}</p>
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {/* Footer */}
             <footer style={styles.footer}>
