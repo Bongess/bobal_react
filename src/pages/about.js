@@ -42,7 +42,7 @@ export default function About() {
             minHeight: '100vh',  
         },
         headerFooter: {
-            backgroundColor: '#0059FF',  
+            backgroundColor: '#fef6e4',  
             color: '#fff',
             padding: '15px 0',
             fontSize: '28px',
@@ -50,7 +50,7 @@ export default function About() {
             borderRadius: '0 0 20px 20px',  
         },
         footer: {
-            backgroundColor: '#0059FF',  
+            backgroundColor: '#fef6e4',  
             color: '#fff',
             padding: '10px 0',
             fontSize: '16px',
@@ -140,7 +140,7 @@ export default function About() {
 
             {/* Footer */}
             <footer style={styles.footer}>
-                &copy; 2025 Kočičí Fakta.
+                &copy; 2025 BOBY
             </footer>
         </div>
     );
