@@ -123,7 +123,7 @@ export default function About() {
         <div style={styles.container}>
             {/* Header */}
             <header style={styles.headerFooter}>
-                Kočičí Fakta a Obrázky
+                Kočičí fakta a obrázky
             </header>
 
             {/* Main Image */}
