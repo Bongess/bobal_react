@@ -121,8 +121,8 @@ export default function About() {
             boxShadow: '0 0 10px #9d00ff',
             transition: 'transform 0.2s ease',
         },
-        buttonHover: {
-            transform: 'scale(1.05)',
+        buttonContainer: {
+            marginTop: '40px',
         }
     };
 
@@ -169,6 +169,16 @@ export default function About() {
             <footer style={styles.footer}>
                 &copy; 2025 BOBY
             </footer>
+
+            {/* Tlačítko zpět na homepage */}
+            <div style={styles.buttonContainer}>
+                <button
+                    style={styles.button}
+                    onClick={() => window.location.href = '/'}
+                >
+                    🏠 Zpět na domovskou stránku
+                </button>
+            </div>
         </div>
     );
 }
